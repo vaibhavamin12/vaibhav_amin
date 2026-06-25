@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vaibhav Amin — Sr. Product Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:   #0A0F1E;
+    --navy2:  #131929;
+    --teal:   #00D4C8;
+    --amber:  #F4A942;
+    --white:  #F5F0E8;
+    --slate:  #8891A4;
+    --card:   #161D30;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 5vw;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--slate); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--teal);
+    color: var(--teal); padding: 0.5rem 1.2rem; border-radius: 4px;
+    font-size: 0.85rem; font-weight: 500; cursor: pointer;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--teal); color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10rem 5vw 6rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image:
+      linear-gradient(var(--white) 1px, transparent 1px),
+      linear-gradient(90deg, var(--white) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block; width: 28px; height: 2px; background: var(--teal);
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: -2px;
+    max-width: 14ch;
+  }
+  .hero h1 .accent { color: var(--teal); }
+  .hero-sub {
+    max-width: 52ch; margin-top: 1.75rem;
+    color: var(--slate); font-size: 1.1rem; line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;
+  }
+  .hero-stat strong {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--white);
+    letter-spacing: -1px; line-height: 1;
+  }
+  .hero-stat span {
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--slate); margin-top: 0.3rem;
+    display: block;
+  }
+  .hero-actions { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.9rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    border: 1px solid var(--border); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-weight: 500; font-size: 0.9rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--slate); }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 5vw;
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--slate);
+  }
+  .scroll-hint::before {
+    content: '';
+    display: block; width: 1px; height: 40px;
+    background: linear-gradient(var(--teal), transparent);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 5vw; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; letter-spacing: -1px;
+    line-height: 1.15; max-width: 22ch;
+  }
+  .section-divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── WORK / CASE STUDIES ── */
+  .work { background: var(--navy2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--amber));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .project-card:hover { border-color: rgba(0,212,200,0.25); transform: translateY(-3px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-domain {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem; font-weight: 600; letter-spacing: -0.3px;
+    margin-bottom: 0.6rem; color: var(--white);
+  }
+  .project-desc {
+    font-size: 0.88rem; color: var(--slate); line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  .project-meta {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em;
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); color: var(--slate);
+  }
+  .project-impact {
+    margin-top: 1.25rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem; color: var(--teal);
+    font-weight: 500;
+  }
+  .project-impact strong { color: var(--white); }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .experience { background: var(--navy); }
+  .timeline { margin-top: 3.5rem; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(var(--teal), transparent);
+  }
+  .timeline-item {
+    padding: 0 0 3rem 2.5rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 4px rgba(0,212,200,0.15);
+  }
+  .timeline-date {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--slate); margin-bottom: 0.4rem;
+  }
+  .timeline-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem; font-weight: 600; letter-spacing: -0.2px;
+    color: var(--white); margin-bottom: 0.2rem;
+  }
+  .timeline-company {
+    font-size: 0.88rem; color: var(--teal); font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .timeline-bullets {
+    list-style: none; display: flex; flex-direction: column; gap: 0.55rem;
+  }
+  .timeline-bullets li {
+    font-size: 0.88rem; color: var(--slate); padding-left: 1rem; position: relative;
+  }
+  .timeline-bullets li::before {
+    content: '—';
+    position: absolute; left: 0; color: var(--border);
+  }
+
+  /* ── SKILLS ── */
+  .skills { background: var(--navy2); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem; margin-top: 3rem;
+  }
+  .skill-group {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .skill-group-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.82rem; font-weight: 500;
+    padding: 0.35rem 0.85rem; border-radius: 4px;
+    background: rgba(0,212,200,0.07);
+    border: 1px solid rgba(0,212,200,0.18);
+    color: var(--white);
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-left .section-title { margin-bottom: 1.5rem; }
+  .about-body { color: var(--slate); font-size: 0.95rem; line-height: 1.8; }
+  .about-body p + p { margin-top: 1rem; }
+  .about-right { display: flex; flex-direction: column; gap: 1.25rem; }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 6px;
+    background: rgba(0,212,200,0.1); border: 1px solid rgba(0,212,200,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+  .cert-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .cert-sub { font-size: 0.78rem; color: var(--slate); }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem 1.5rem;
+  }
+  .edu-degree {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem;
+  }
+  .edu-inst { font-size: 0.82rem; color: var(--slate); }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--navy2);
+    text-align: center; padding: 7rem 5vw;
+    position: relative; overflow: hidden;
+  }
+  .contact-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 600px; height: 300px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0,212,200,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .contact .section-title { margin: 0.5rem auto 1.5rem; max-width: 20ch; }
+  .contact-sub { color: var(--slate); max-width: 40ch; margin: 0 auto 2.5rem; font-size: 0.95rem; }
+  .contact-links {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--slate); text-decoration: none;
+    padding: 0.65rem 1.25rem; border: 1px solid var(--border);
+    border-radius: 4px; transition: all 0.2s;
+  }
+  .contact-link:hover {
+    color: var(--white); border-color: rgba(255,255,255,0.2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.78rem; color: var(--slate);
+  }
+  footer a { color: var(--slate); text-decoration: none; }
+  footer a:hover { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5vw; }
+    .nav-links { display: none; }
+    .about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card, .project-card::before, .btn-primary,
+    .btn-ghost, .contact-link { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">VA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Let's talk</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <p class="hero-tag">Senior Product Designer</p>
+  <h1>Design that<br/>ships and <span class="accent">sticks.</span></h1>
+  <p class="hero-sub">
+    I'm Vaibhav Amin — I lead cross-functional teams to turn messy, complex problems into mobile and web products that people actually use. 6+ years across healthtech, edtech, maritime, and beyond.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>6+</strong><span>Years experience</span>
+    </div>
+    <div class="hero-stat">
+      <strong>22+</strong><span>Team members led</span>
+    </div>
+    <div class="hero-stat">
+      <strong>90%</strong><span>Paperwork reduced for clients</span>
+    </div>
+    <div class="hero-stat">
+      <strong>7K+</strong><span>Engaged users delivered</span>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#work">View my work →</a>
+    <a class="btn-ghost" href="mailto:vaibhavamin97@gmail.com">Get in touch</a>
+  </div>
+  <p class="scroll-hint">Scroll to explore</p>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-title">Products I've helped build from zero to one</h2>
+
+  <div class="projects-grid">
+
+    <!-- 1 -->
+    <div class="project-card">
+      <p class="project-domain">Maritime · ERP</p>
+      <h3 class="project-name">Beacon — Vessel Management</h3>
+      <p class="project-desc">
+        Shipping companies ran global sea voyages on paperwork and phone calls. I led the zero-to-one design strategy for a single system that replaced all of it — voyage ops, crew management, and compliance, unified.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">Zero-to-one</span>
+        <span class="meta-tag">Mobile + Web</span>
+        <span class="meta-tag">11+ person team</span>
+      </div>
+      <p class="project-impact"><strong>90% reduction</strong> in client paperwork after launch</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="project-card">
+      <p class="project-domain">Healthtech · SaaS</p>
+      <h3 class="project-name">One Health Assist</h3>
+      <p class="project-desc">
+        A B2C and B2B platform connecting patients with doctors and wellness practitioners, with integrated medicine and lab-test upselling. I co-led a 22-person team and worked directly with the founders' office on product strategy.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">Mobile + Web</span>
+        <span class="meta-tag">B2C + B2B</span>
+        <span class="meta-tag">Founders Office</span>
+      </div>
+      <p class="project-impact">End-to-end doctor appointment and wellness platform</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="project-card">
+      <p class="project-domain">Edtech · NGO · CRM</p>
+      <h3 class="project-name">Veedum Vizhippum</h3>
+      <p class="project-desc">
+        A mobile and web platform empowering parents in Tamil Nadu with foundational learning workshops, built for an NGO. I managed client comms, sprints, and QA — taking the product from idea through go-to-market.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">CRM + App</span>
+        <span class="meta-tag">Agile sprints</span>
+        <span class="meta-tag">7-person team</span>
+      </div>
+      <p class="project-impact"><strong>7,000+ active users</strong> as of Sept 2024</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="project-card">
+      <p class="project-domain">Edtech · Consumer App</p>
+      <h3 class="project-name">Milestone — Financial Literacy</h3>
+      <p class="project-desc">
+        A money management app teaching young children financial literacy through daily household chores and a reward system. Parents and children each get a separate, integrated app experience.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">Product identity</span>
+        <span class="meta-tag">Dual-app design</span>
+        <span class="meta-tag">UI/UX</span>
+      </div>
+      <p class="project-impact">Dual-app system: parent view + child view, linked in real-time</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="project-card">
+      <p class="project-domain">Sustainability · Brand</p>
+      <h3 class="project-name">Exigo — E-Waste Management</h3>
+      <p class="project-desc">
+        Conceptualised the brand strategy and visual identity for an e-waste management company from scratch. Designed corporate and business vertical websites plus full brand collateral under a unified monolithic architecture.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">Brand strategy</span>
+        <span class="meta-tag">Web design</span>
+        <span class="meta-tag">Visual identity</span>
+      </div>
+      <p class="project-impact">End-to-end brand + digital presence — zero to launch</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="project-card">
+      <p class="project-domain">Edtech · SaaS</p>
+      <h3 class="project-name">Milgrasp — School Management</h3>
+      <p class="project-desc">
+        Designed the online exam feature, inventory management system, staff and student attendance redesign, and a graphical student fees module — across admin, teacher, student, and parent apps with 5,000+ active users.
+      </p>
+      <div class="project-meta">
+        <span class="meta-tag">Multi-role app</span>
+        <span class="meta-tag">5,000+ users</span>
+        <span class="meta-tag">Feature design</span>
+      </div>
+      <p class="project-impact">Multiple feature launches across 4 distinct user roles</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Where I've worked</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <p class="timeline-date">Aug 2025 – Present · 11 months</p>
+      <p class="timeline-role">Sr. Product Designer</p>
+      <p class="timeline-company">Mizzen Digital</p>
+      <ul class="timeline-bullets">
+        <li>Leading zero-to-one product design strategy for Beacon, a comprehensive commercial vessel management application.</li>
+        <li>Led a team of 11+ engineers and designers to launch a vessel management app that reduced paperwork by 90% for clients.</li>
+        <li>Replaced manual shipping operations — messy paperwork, endless emails and calls — with a single, unified digital system.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">Feb 2025 – Jul 2025 · 6 months</p>
+      <p class="timeline-role">Sr. Product Designer</p>
+      <p class="timeline-company">Arham Labs — One Health Assist</p>
+      <ul class="timeline-bullets">
+        <li>Led a cross-functional team of 22+ designers and engineers on a healthtech SaaS and mobile app.</li>
+        <li>Worked directly with the founders' office to drive stakeholder requirement gathering and solution design.</li>
+        <li>Designed mobile and web applications for doctor and wellness practitioner appointments with integrated upselling of medicines and lab tests — serving both B2C and B2B users.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">Oct 2022 – Feb 2025 · 2 yrs 5 mos</p>
+      <p class="timeline-role">Product Designer</p>
+      <p class="timeline-company">Arham Labs — Edtech</p>
+      <ul class="timeline-bullets">
+        <li>Led a 7-person team through product development sprints for Veedum Vizhippum, an NGO edtech initiative in Tamil Nadu.</li>
+        <li>Managed client communication, solution design, and QA oversight from ideation through go-to-market.</li>
+        <li>Achieved 7,000 engaged users as of September 2024.</li>
+        <li>Also designed Milestone, a dual-app financial literacy product for children and parents.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">Jul 2021 – Oct 2022 · 1 yr 3 mos</p>
+      <p class="timeline-role">UI/UX Designer</p>
+      <p class="timeline-company">Arham Labs</p>
+      <ul class="timeline-bullets">
+        <li>Designed brand strategy and visual identity for Exigo, an e-waste management company, using monolithic brand architecture.</li>
+        <li>Designed a website for AH India, a fashion conglomerate spanning leather manufacturing, trading, and retail.</li>
+        <li>Built a personal portfolio website for award-winning executive coach Philippe Mathijs (30+ years of experience, 10 at C-suite level).</li>
+        <li>Delivered 7+ additional projects across Fintech, data labelling, and commodity trading within tight deadlines.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">Jul 2020 – Jul 2021 · 1 yr 1 mo</p>
+      <p class="timeline-role">UI/UX Designer</p>
+      <p class="timeline-company">MilGrasp | Milearth Softech</p>
+      <ul class="timeline-bullets">
+        <li>Designed an online exam feature across admin and teacher apps; served 5,000+ active users on student and parent apps.</li>
+        <li>Conceptualised and designed an Inventory Feature — an inventory management and payment solution.</li>
+        <li>Revamped the Signup/Login experience on the admin app and redesigned the Staff & Student Attendance section.</li>
+        <li>Designed a Student Fees module with graphical instalment visualisation.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- SKILLS & ABOUT -->
+<section class="skills" id="skills">
+  <p class="section-label">Toolkit</p>
+  <h2 class="section-title">Skills & tools</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <p class="skill-group-label">Design Tools</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Adobe XD</span>
+        <span class="skill-tag">Webflow</span>
+        <span class="skill-tag">Miro</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Design Practice</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Wireframing</span>
+        <span class="skill-tag">Prototyping</span>
+        <span class="skill-tag">User Research</span>
+        <span class="skill-tag">Usability Testing</span>
+        <span class="skill-tag">IA & User Flows</span>
+        <span class="skill-tag">Journey Mapping</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Collaboration & Process</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Agile</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Cross-functional Teams</span>
+        <span class="skill-tag">Client Communication</span>
+        <span class="skill-tag">QA Oversight</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Product Skills</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Zero-to-one Products</span>
+        <span class="skill-tag">Product Strategy</span>
+        <span class="skill-tag">Brand Identity</span>
+        <span class="skill-tag">B2B + B2C Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <p class="section-label">About</p>
+    <h2 class="section-title">The person behind the pixels</h2>
+    <div class="about-body">
+      <p>I'm a Senior Product Designer with 6+ years of experience leading design for mobile and web products across maritime, healthcare, education, sustainability, and finance.</p>
+      <p>I believe great design isn't about beautiful screens — it's about reducing friction for the people who actually use the product. Whether I'm running a design sprint with a 22-person team or working one-on-one with a founder, I bring the same discipline: understand the problem deeply before jumping to solutions.</p>
+      <p>When I'm not designing, I'm trekking trails or playing guitar — both hobbies that teach you that a good process beats rushing to the destination every time.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="edu-card">
+      <p class="section-label" style="margin-bottom:0.5rem">Education</p>
+      <p class="edu-degree">Bachelor of Engineering (B.E.) — Information Technology</p>
+      <p class="edu-inst">SIES Graduate School of Technology, Mumbai University · 2020</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <p class="cert-title">Webflow 101 Certification</p>
+        <p class="cert-sub">Webflow · Aug 2023</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📐</div>
+      <div>
+        <p class="cert-title">UI/UX Design Specialisation</p>
+        <p class="cert-sub">Coursera · Nov 2020 — Usability testing, IA, high-fidelity design</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-glow"></div>
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Have a project in mind?</h2>
+  <p class="contact-sub">I'm always open to interesting design challenges — whether that's a new product, a team to lead, or a hard problem to untangle.</p>
+  <div class="contact-links">
+    <a class="contact-link btn-primary" href="mailto:vaibhavamin97@gmail.com">
+      ✉ vaibhavamin97@gmail.com
+    </a>
+    <a class="contact-link" href="https://linkedin.com/in/vaibhavamin" target="_blank" rel="noopener">
+      ↗ LinkedIn
+    </a>
+    <a class="contact-link" href="#" target="_blank" rel="noopener">
+      ↗ Portfolio
+    </a>
+    <a class="contact-link" href="tel:+918976150797">
+      📞 +91 89761 50797
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Vaibhav Amin. All rights reserved.</span>
+  <span>Mumbai, India · Open to opportunities</span>
+</footer>
+
+</body>
+</html>
