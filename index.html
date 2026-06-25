@@ -6,6 +6,7 @@
 <title>Vaibhav Amin — Sr. Product Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
+  /* ── DARK MODE (default) ── */
   :root {
     --navy:   #0A0F1E;
     --navy2:  #131929;
@@ -15,6 +16,20 @@
     --slate:  #8891A4;
     --card:   #161D30;
     --border: rgba(255,255,255,0.07);
+    --nav-bg: rgba(10,15,30,0.85);
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  /* ── LIGHT MODE ── */
+  body.light {
+    --navy:   #F0F4FF;
+    --navy2:  #E4EAF8;
+    --white:  #0D1220;
+    --slate:  #5A6480;
+    --card:   #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --nav-bg: rgba(240,244,255,0.88);
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,6 +43,34 @@
     font-size: 16px;
     line-height: 1.65;
     overflow-x: hidden;
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    display: flex; align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+    gap: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .theme-toggle-btn {
+    width: 32px; height: 32px; border-radius: 100px;
+    border: none; background: transparent; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; transition: background 0.2s;
+    color: var(--slate);
+  }
+  .theme-toggle-btn.active {
+    background: var(--teal);
+    color: var(--navy);
+  }
+  body.light .theme-toggle-btn.active {
+    color: #0A0F1E;
   }
 
   /* ── NAV ── */
@@ -35,9 +78,10 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.25rem 5vw;
-    background: rgba(10,15,30,0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
+    transition: background 0.35s ease, border-color 0.35s ease;
   }
   .nav-logo {
     font-family: 'Space Grotesk', sans-serif;
@@ -169,7 +213,7 @@
     border: 1px solid var(--border);
     border-radius: 8px; padding: 2rem;
     position: relative; overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
+    transition: border-color 0.3s, transform 0.3s, background 0.35s ease;
     cursor: default;
   }
   .project-card::before {
@@ -376,7 +420,13 @@
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">Let's talk</a>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="theme-toggle" id="themeToggle" title="Toggle day/night mode">
+      <button class="theme-toggle-btn" id="btnDark" onclick="setTheme('dark')" aria-label="Dark mode">🌙</button>
+      <button class="theme-toggle-btn" id="btnLight" onclick="setTheme('light')" aria-label="Light mode">☀️</button>
+    </div>
+    <a class="nav-cta" href="#contact">Let's talk</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -694,6 +744,27 @@
   <span>© 2025 Vaibhav Amin. All rights reserved.</span>
   <span>Mumbai, India · Open to opportunities</span>
 </footer>
+<script>
+  function setTheme(mode) {
+    if (mode === 'light') {
+      document.body.classList.add('light');
+      document.getElementById('btnLight').classList.add('active');
+      document.getElementById('btnDark').classList.remove('active');
+      localStorage.setItem('va-theme', 'light');
+    } else {
+      document.body.classList.remove('light');
+      document.getElementById('btnDark').classList.add('active');
+      document.getElementById('btnLight').classList.remove('active');
+      localStorage.setItem('va-theme', 'dark');
+    }
+  }
+
+  // Init on load — default to dark
+  (function() {
+    const saved = localStorage.getItem('va-theme') || 'dark';
+    setTheme(saved);
+  })();
+</script>
 
 </body>
 </html>
